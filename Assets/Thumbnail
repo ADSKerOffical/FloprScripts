@@ -1,0 +1,16 @@
+local function GetAssetFromLink(link)
+  local success, response = pcall(function()
+     return game:HttpGet(link)
+end)
+   
+   if success then
+local Icon = "Image.png"
+writefile(Icon, response)
+return getcustomasset(Icon)
+  else
+warn("Failed to load asset: ", response)
+return "rbxassetid://0"
+   end
+end
+
+return GetAssetFromLink("https://i.ibb.co/k2DQtRX0/IMG-20250406-202951-009.jpg")
