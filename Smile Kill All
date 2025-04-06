@@ -1,0 +1,22 @@
+while task.wait() do
+ if game.Workspace:FindFirstChild(game.Players.LocalPlayer.Name) and game.Players.LocalPlayer.Character:FindFirstChild("HumanoidRootPart") and Workspace:FindFirstChild("Slendrina") then
+  game.Players.LocalPlayer.SimulationRadius = math.huge
+  game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = Workspace.Slendrina.Head.CFrame * CFrame.new(0, 5, 0)
+  for _, part in next, workspace:GetPartBoundsInRadius(game.Players.LocalPlayer.Character.HumanoidRootPart.Position, 40) do
+    if part:FindFirstChild("TouchInterest") then
+      for _, player in next, game.Players:GetPlayers() do
+         if player ~= game.Players.LocalPlayer and workspace:FindFirstChild(player.Name) then
+           for _, parte in next, player.Character:GetChildren() do
+             if parte:IsA("BasePart") then
+               task.spawn(function()
+                 firetouchinterest(part, parte, 0)
+                 firetouchinterest(part, parte, 1)
+               end)
+             end
+           end
+         end
+       end
+     end
+   end
+ end
+end
